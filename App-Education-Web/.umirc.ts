@@ -4,8 +4,7 @@ import * as path from 'path';
 export default defineConfig({
   hash: true,
   title: '网易 | 智慧云课堂',
-  publicPath:
-    process.env.NODE_ENV === 'production' ? '/webdemo/yxEducation/' : '/',
+  publicPath: '/',
   define: {
     'process.env.ENV': process.env.ENV,
   },
