@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">智慧云课堂</string>
+
+    <string name="prompt_class_id">课堂号</string>
+    <string name="prompt_nickname">昵称</string>
+    <string name="action_join_class">加入课堂</string>
+    <string name="action_join_class_short">加入</string>
+
+    <string name="invalid_classid">课堂号不正确</string>
+    <string name="invalid_nickname">昵称不正确</string>
+
+    <string name="disclaimer">加入课堂即视为您已同意%1$s和%2$s</string>
+    <string name="disclaimer_prefix">加入课堂即视为您已同意</string>
+    <string name="disclaimer_and">和</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="user_agreement">用户服务协议</string>
+
+    <string name="alert">提示</string>
+    <string name="some_permission_disallowed">部分权限请求已被拒绝，应用功能可能无法正常使用</string>
+    <string name="i_know">我知道了</string>
+
+    <string name="participant_menu_text">课堂成员</string>
+
+</resources>

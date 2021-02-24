@@ -1,0 +1,75 @@
+import java.util.function.IntBinaryOperator
+import java.util.function.ToIntFunction
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_version = '1.4.21'
+        hilt_version = '2.31.2-alpha'
+        androidx_hilt_version = '1.0.0-alpha03'
+    }
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+// version style: major.minor.hotfix{.buildNum}
+// if version name = a.b.c.d
+// then version code = a * 100,00,00 + b * 100,00 * c * 100 + d
+def versionName = '1.0.0.0'
+if (project.hasProperty('VERSION_NAME')) {
+    versionName = project.property('VERSION_NAME').toString()
+}
+def versionCode = "$versionName.0".split('\\.').toList().stream()
+        .limit(4)
+        .mapToInt(new ToIntFunction<String>() {
+            @Override
+            int applyAsInt(String s) {
+                return Integer.parseInt(s)
+            }
+        })
+        .reduce(0, new IntBinaryOperator() {
+            @Override
+            int applyAsInt(int lhs, int rhs) {
+                return lhs * 100 + rhs
+            }
+        }).intValue()
+
+println "Version Info: versionName=$versionName versionCode=$versionCode"
+
+allprojects {
+    repositories {
+        maven {
+            url 'http://mvn.hz.netease.com/artifactory/libs-snapshots/'
+        }
+        google()
+        jcenter()
+    }
+    ext {
+        VERSION_CODE = versionCode as int
+        VERSION_NAME = versionName
+        localProperties = loadLocalProperties()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+Properties loadLocalProperties() {
+    Properties properties = new Properties()
+    if (file('local.properties').exists()) {
+        properties.load(new FileInputStream(file('local.properties')))
+    }
+    return properties
+}
